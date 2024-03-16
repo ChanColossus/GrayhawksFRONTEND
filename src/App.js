@@ -56,7 +56,7 @@ function App() {
           "Content-Type": "multipart/form-data"
         },
       };
-      const response = await axios.post("http://localhost:4001/api/v1/entry/new", formData,config);
+      const response = await axios.post("https://grayhawksbackend.onrender.com/api/v1/entry/new", formData,config);
       console.log("Response:", response.data); // Log response after submission
       // Reset form fields after successful submission
       setFormData({
@@ -78,7 +78,7 @@ function App() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:4001/api/v1/entries');
+      const response = await axios.get('https://grayhawksbackend.onrender.com/api/v1/entries');
       const reversedUsers = response.data.entries.reverse();
       setUsers(reversedUsers);
       setUsersCount(response.data.entries.length)
