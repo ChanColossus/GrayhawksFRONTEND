@@ -281,7 +281,7 @@ function App() {
         <div>
  
           <Typography variant="h5" component="h2" gutterBottom style={{fontFamily: 'Michroma, sans-serif' }}>Total Entries:{usersCount}</Typography>
-          <Table style={{ border: '4px solid maroon' }}>
+          <Table style={{ border: '4px solid maroon' }} responsive>
             <TableHead>
               <TableRow>
                 <TableCell  style={{ borderBottom: '2px solid maroon' }}>First Name</TableCell>
@@ -323,7 +323,7 @@ function App() {
         </div>
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid item xs={4} responsive>
   <div style={{ height: '100%', width: '100%',paddingTop:"50px" }}>
   <Typography variant="h2" component="h2" gutterBottom style={{ textAlign: 'center', fontFamily: 'Michroma, sans-serif'  }}>
   Schedule
