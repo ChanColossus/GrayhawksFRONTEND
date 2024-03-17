@@ -12,7 +12,9 @@ import { AppBar, Toolbar } from '@mui/material';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { rootShouldForwardProp } from '@mui/material/styles/styled';
 function App() {
 
   const [formData, setFormData] = useState({
@@ -126,6 +128,42 @@ function App() {
 
  // Change page
  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+ 
+ const exportToPDF = () => {
+  const doc = new jsPDF();
+  const imgData = Logo;
+  const textWidth = doc.getTextWidth("TUPT Grayhawks Esports");
+  const xCoordinate = (doc.internal.pageSize.getWidth() - textWidth) / 2;
+  doc.addImage(imgData, 'PNG', 80, 10, 40, 20); // Adjust position and size as needed
+
+  doc.text("TUPT Grayhawks Esports", xCoordinate, 30); 
+
+  const rows = [];
+  users.forEach((row, index) => {
+    rows.push([
+      row.fname,
+      row.lname,
+      row.email,
+      row.contact,
+      row.dcId,
+      row.cbzndc,
+      row.givelabs
+    ]);
+  });
+  
+  doc.autoTable({
+    startY: 35,
+    head: [['First Name', 'Last Name', 'Email', 'Contact Number', 'Discord ID', 'CBZN Discord', 'Givelabs Requirements']],
+    body: rows,
+    headStyles: {
+      fillColor: [128, 0, 0], // Maroon color
+      textColor: [255, 255, 255] // White text color
+    }
+  });
+
+  doc.save('GrayhawksEsports.pdf');
+};
+
   return (
     <>
     <style>
@@ -281,7 +319,11 @@ function App() {
         <div>
  
           <Typography variant="h5" component="h2" gutterBottom style={{fontFamily: 'Michroma, sans-serif' }}>Total Entries:{usersCount}</Typography>
-          <TableContainer>
+          <Button variant="outlined" color="error" onClick={exportToPDF}>
+          Export to PDF
+        </Button>
+    
+          <TableContainer style={{paddingTop:'10px'}}>
           <Table style={{ border: '4px solid maroon' }} responsive>
             <TableHead>
               <TableRow>
