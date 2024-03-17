@@ -12,7 +12,10 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.carousel-container {
+  width: 50%; /* Adjust the width as needed */
+  margin: 0 auto; /* Center the carousel horizontally */
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

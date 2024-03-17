@@ -2,25 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Grid,Container, TextField, Button, Typography, Select, MenuItem, FormControl, InputLabel,Table, TableHead, TableRow, TableCell, TableBody  } from '@mui/material';
 import axios from 'axios';
 import { Navbar, NavbarBrand } from "reactstrap"; // Changed import statement
-import { makeStyles } from '@mui/styles';
+
 import Logo from "./grx.png"
 import Day1 from "./Day1.jpg"
 import Day2 from "./Day2.jpg"
 import Day3 from "./Day3.jpg"
 import Footer from "./Footer.png"
 import { AppBar, Toolbar } from '@mui/material';
-import Carousel from 'react-elastic-carousel';
-const useStyles = makeStyles((theme) => ({
-  footer: {
-    width: '100%',
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    zIndex: 1000,
-  },
-}));
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 function App() {
-  const classes = useStyles();
+
   const [formData, setFormData] = useState({
     fname: '',
     lname: '',
@@ -30,7 +24,17 @@ function App() {
     cbzndc: 'False',
     givelabs: 'False'
   });
-
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    adaptiveHeight: true,
+  };
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(10);
@@ -129,6 +133,10 @@ function App() {
         body {
           background: linear-gradient(to top, rgba(255,0,0,0.5), rgba(255,255,255,0.5));
           font-family: 'Michroma', sans-serif;
+        }
+        .carousel-container {
+          width: 80%; 
+          margin: 0 auto; 
         }
       `}
     </style>
@@ -320,16 +328,20 @@ function App() {
   <Typography variant="h2" component="h2" gutterBottom style={{ textAlign: 'center', fontFamily: 'Michroma, sans-serif'  }}>
   Schedule
 </Typography>
-    <Carousel style={{ height: '100%', width: '100%' }}>
-      {carouselItems.map(item => (
-        <img key={item.id} src={item.image} alt={`Day ${item.id}`} style={{ objectFit: 'cover', width: '100%', height: '100%',border: '4px solid maroon' }} />
-      ))}
-    </Carousel>
+<div className="carousel-container" style={{border: '4px solid maroon' }}> {/* Set the width of this container */}
+      <Slider {...settings}>
+        {carouselItems.map(item => (
+          <div key={item.id}>
+            <img src={item.image} alt={`Day ${item.id}`} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+          </div>
+        ))}
+      </Slider>
+    </div>
   </div>
 </Grid>
 
 </Grid>
-<div className={classes.footer}>
+<div style={{ position: 'fixed', bottom: 0, left: 0, width: '100%' }}>
       <img src={Footer} alt="Footer" style={{ width: '100%', height: 'auto' }} />
     </div>
     </>
