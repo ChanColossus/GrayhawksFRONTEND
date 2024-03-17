@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid,Container, TextField, Button, Typography, Select, MenuItem, FormControl, InputLabel,Table, TableHead, TableRow, TableCell, TableBody  } from '@mui/material';
+import { Grid,Container, TextField, Button, Typography, Select, MenuItem, FormControl, InputLabel,Table, TableHead, TableRow, TableCell, TableBody,TableContainer  } from '@mui/material';
 import axios from 'axios';
 import { Navbar, NavbarBrand } from "reactstrap"; // Changed import statement
 
@@ -31,7 +31,7 @@ function App() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 10000,
     pauseOnHover: true,
     adaptiveHeight: true,
   };
@@ -149,9 +149,9 @@ function App() {
     </AppBar>
    
 
-<Grid container style={{ height: '100vh', marginTop: '70px',paddingLeft:"20px" }} spacing={3}>
+<Grid container style={{  marginTop: '70px',paddingLeft:"20px" }} spacing={3}>
 
-<Grid item xs={3}>
+<Grid item xs={12} sm={6} md={3}>
         
         <div >
           <Typography variant="h5" component="h2" gutterBottom style={{ textAlign: 'center',fontFamily: 'Michroma, sans-serif'  }}>Registration Form</Typography>
@@ -277,10 +277,11 @@ function App() {
         </div>
         </Grid>
 
-<Grid item xs={5}>
+<Grid item xs={12} sm={6} md={5}>
         <div>
  
           <Typography variant="h5" component="h2" gutterBottom style={{fontFamily: 'Michroma, sans-serif' }}>Total Entries:{usersCount}</Typography>
+          <TableContainer>
           <Table style={{ border: '4px solid maroon' }} responsive>
             <TableHead>
               <TableRow>
@@ -307,6 +308,7 @@ function App() {
               ))}
             </TableBody>
           </Table>
+          </TableContainer>
           <br/>
           <div style={{ textAlign: 'center' }}>
   {Array.from({ length: Math.ceil(users.length / usersPerPage) }, (_, i) => (
@@ -323,20 +325,20 @@ function App() {
         </div>
         </Grid>
 
-        <Grid item xs={4} responsive>
+        <Grid item xs={12} sm={12} md={4}>
   <div style={{ height: '100%', width: '100%',paddingTop:"50px" }}>
   <Typography variant="h2" component="h2" gutterBottom style={{ textAlign: 'center', fontFamily: 'Michroma, sans-serif'  }}>
   Schedule
 </Typography>
-<div className="carousel-container" style={{border: '4px solid maroon' }}> {/* Set the width of this container */}
-      <Slider {...settings}>
-        {carouselItems.map(item => (
-          <div key={item.id}>
-            <img src={item.image} alt={`Day ${item.id}`} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
-          </div>
-        ))}
-      </Slider>
-    </div>
+<div className="carousel-container" style={{ border: '4px solid maroon', maxWidth: '100%' }}>
+    <Slider {...settings} style={{ maxWidth: '100%' }}>
+      {carouselItems.map(item => (
+        <div key={item.id}>
+          <img src={item.image} alt={`Day ${item.id}`} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+        </div>
+      ))}
+    </Slider>
+  </div>
   </div>
 </Grid>
 
