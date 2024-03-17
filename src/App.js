@@ -37,7 +37,7 @@ function App() {
   };
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(10);
+  const [usersPerPage] = useState(8);
   const [usersCount, setUsersCount] = useState(0);
   const [createErrors, setCreateErrors] = useState({}); 
   const handleChange = (e) => {
@@ -149,7 +149,7 @@ function App() {
     </AppBar>
    
 
-<Grid container style={{  marginTop: '70px',paddingLeft:"20px" }} spacing={3}>
+<Grid container style={{  maxHeight:"100%",height:"100vh",marginTop: '70px',paddingLeft:"20px", overflow: 'auto'  }} spacing={3}>
 
 <Grid item xs={12} sm={6} md={3}>
         
